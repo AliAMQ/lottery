@@ -1,0 +1,21 @@
+version: '2'
+services:
+    lottery-app:
+        image: lottery
+        environment:
+            # - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://lottery-mysql:3306/lottery?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=lottery-elasticsearch:9300
+            - JAVA_OPTS=-Djgroups.tcp.address=NON_LOOPBACK -Djava.net.preferIPv4Stack=true
+        ports:
+            - 8080:8080
+    lottery-mysql:
+        extends:
+            file: mysql.yml
+            service: lottery-mysql
+    lottery-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: lottery-elasticsearch
