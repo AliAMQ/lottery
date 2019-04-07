@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-lottery-heading" jhiTranslate="lotteryApp.lottery.home.createOrEditLabel">Create or edit a Lottery</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!lottery.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="lottery.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lotteryApp.lottery.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="lottery.title" required/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lotteryApp.lottery.minparticipants" for="field_minparticipants">Minparticipants</label>
+                    <input type="number" class="form-control" name="minparticipants" id="field_minparticipants"
+                        [(ngModel)]="lottery.minparticipants" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lotteryApp.lottery.maxparticipnts" for="field_maxparticipnts">Maxparticipnts</label>
+                    <input type="number" class="form-control" name="maxparticipnts" id="field_maxparticipnts"
+                        [(ngModel)]="lottery.maxparticipnts" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lotteryApp.lottery.price" for="field_price">Price</label>
+                    <input type="number" class="form-control" name="price" id="field_price"
+                        [(ngModel)]="lottery.price" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lotteryApp.lottery.userProfile" for="field_userProfile">User Profile</label>
+                    <select class="form-control" id="field_userProfile" name="userProfile" [(ngModel)]="lottery.userProfileId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userProfileOption.id" *ngFor="let userProfileOption of userprofiles; trackBy: trackUserProfileById">{{userProfileOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+{
+    "name": "History",
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "lottery",
+            "otherEntityName": "lottery",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "prize",
+            "otherEntityName": "prize",
+            "otherEntityRelationshipName": "history"
+        }
+    ],
+    "changelogDate": "20190407231428",
+    "entityTableName": "history",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,29 @@
+
+{
+    "lotteryApp": {
+        "lottery" : {
+            "home": {
+                "title": "Lotteries",
+                "createLabel": "Create a new Lottery",
+                "createOrEditLabel": "Create or edit a Lottery",
+                "search": "Search for Lottery"
+            },
+            "created": "A new Lottery is created with identifier {{ param }}",
+            "updated": "A Lottery is updated with identifier {{ param }}",
+            "deleted": "A Lottery is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Lottery {{ id }}?"
+            },
+            "detail": {
+                "title": "Lottery"
+            },
+            "title": "Title",
+            "minparticipants": "Minparticipants",
+            "maxparticipnts": "Maxparticipnts",
+            "price": "Price",
+            "userProfile": "User Profile",
+            "prize": "Prize",
+            "history": "History"
+        }
+    }
+}

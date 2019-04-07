@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="lottery">
+            <h2><span jhiTranslate="lotteryApp.lottery.detail.title">Lottery</span> {{lottery.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="lotteryApp.lottery.title">Title</span></dt>
+                <dd>
+                    <span>{{lottery.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="lotteryApp.lottery.minparticipants">Minparticipants</span></dt>
+                <dd>
+                    <span>{{lottery.minparticipants}}</span>
+                </dd>
+                <dt><span jhiTranslate="lotteryApp.lottery.maxparticipnts">Maxparticipnts</span></dt>
+                <dd>
+                    <span>{{lottery.maxparticipnts}}</span>
+                </dd>
+                <dt><span jhiTranslate="lotteryApp.lottery.price">Price</span></dt>
+                <dd>
+                    <span>{{lottery.price}}</span>
+                </dd>
+                <dt><span jhiTranslate="lotteryApp.lottery.userProfile">User Profile</span></dt>
+                <dd>
+                    <div *ngIf="lottery.userProfileId">
+                        <a [routerLink]="['/user-profile', lottery.userProfileId, 'view']">{{lottery.userProfileId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/lottery', lottery.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

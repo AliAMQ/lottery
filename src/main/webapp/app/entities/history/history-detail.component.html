@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="history">
+            <h2><span jhiTranslate="lotteryApp.history.detail.title">History</span> {{history.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="lotteryApp.history.date">Date</span></dt>
+                <dd>
+                    <span>{{history.date}}</span>
+                </dd>
+                <dt><span jhiTranslate="lotteryApp.history.lottery">Lottery</span></dt>
+                <dd>
+                    <div *ngIf="history.lotteryId">
+                        <a [routerLink]="['/lottery', history.lotteryId, 'view']">{{history.lotteryId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/history', history.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

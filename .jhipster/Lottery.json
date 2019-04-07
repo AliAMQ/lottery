@@ -1,0 +1,53 @@
+{
+    "name": "Lottery",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "minparticipants",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "maxparticipnts",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "userProfile",
+            "otherEntityName": "userProfile",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "prize",
+            "otherEntityName": "prize",
+            "otherEntityRelationshipName": "lottery"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "history",
+            "otherEntityName": "history",
+            "otherEntityRelationshipName": "lottery"
+        }
+    ],
+    "changelogDate": "20190407231427",
+    "entityTableName": "lottery",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

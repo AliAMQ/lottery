@@ -185,6 +185,36 @@ public class CacheConfiguration {
             registerPredefinedCache(com.lottery.web.domain.User.class.getName() + ".authorities", new JCache<Object, Object>(
                 cacheManager.getCache(com.lottery.web.domain.User.class.getName() + ".authorities").getAdvancedCache(), this,
                 ConfigurationAdapter.create()));
+            registerPredefinedCache(com.lottery.web.domain.UserProfile.class.getName(), new JCache<Object, Object>(
+                cacheManager.getCache(com.lottery.web.domain.UserProfile.class.getName()).getAdvancedCache(), this,
+                ConfigurationAdapter.create()));
+            registerPredefinedCache(com.lottery.web.domain.UserProfile.class.getName() + ".lotteries", new JCache<Object, Object>(
+                cacheManager.getCache(com.lottery.web.domain.UserProfile.class.getName() + ".lotteries").getAdvancedCache(), this,
+                ConfigurationAdapter.create()));
+            registerPredefinedCache(com.lottery.web.domain.Category.class.getName(), new JCache<Object, Object>(
+                cacheManager.getCache(com.lottery.web.domain.Category.class.getName()).getAdvancedCache(), this,
+                ConfigurationAdapter.create()));
+            registerPredefinedCache(com.lottery.web.domain.Category.class.getName() + ".prizes", new JCache<Object, Object>(
+                cacheManager.getCache(com.lottery.web.domain.Category.class.getName() + ".prizes").getAdvancedCache(), this,
+                ConfigurationAdapter.create()));
+            registerPredefinedCache(com.lottery.web.domain.Prize.class.getName(), new JCache<Object, Object>(
+                cacheManager.getCache(com.lottery.web.domain.Prize.class.getName()).getAdvancedCache(), this,
+                ConfigurationAdapter.create()));
+            registerPredefinedCache(com.lottery.web.domain.Lottery.class.getName(), new JCache<Object, Object>(
+                cacheManager.getCache(com.lottery.web.domain.Lottery.class.getName()).getAdvancedCache(), this,
+                ConfigurationAdapter.create()));
+            registerPredefinedCache(com.lottery.web.domain.Lottery.class.getName() + ".prizes", new JCache<Object, Object>(
+                cacheManager.getCache(com.lottery.web.domain.Lottery.class.getName() + ".prizes").getAdvancedCache(), this,
+                ConfigurationAdapter.create()));
+            registerPredefinedCache(com.lottery.web.domain.Lottery.class.getName() + ".histories", new JCache<Object, Object>(
+                cacheManager.getCache(com.lottery.web.domain.Lottery.class.getName() + ".histories").getAdvancedCache(), this,
+                ConfigurationAdapter.create()));
+            registerPredefinedCache(com.lottery.web.domain.History.class.getName(), new JCache<Object, Object>(
+                cacheManager.getCache(com.lottery.web.domain.History.class.getName()).getAdvancedCache(), this,
+                ConfigurationAdapter.create()));
+            registerPredefinedCache(com.lottery.web.domain.History.class.getName() + ".prizes", new JCache<Object, Object>(
+                cacheManager.getCache(com.lottery.web.domain.History.class.getName() + ".prizes").getAdvancedCache(), this,
+                ConfigurationAdapter.create()));
             // jhipster-needle-infinispan-add-entry
             if (jHipsterProperties.getCache().getInfinispan().isStatsEnabled()) {
                 for (String cacheName : cacheManager.getCacheNames()) {

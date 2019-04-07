@@ -1,0 +1,29 @@
+{
+    "name": "Category",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "prize",
+            "otherEntityName": "prize",
+            "otherEntityRelationshipName": "category"
+        }
+    ],
+    "changelogDate": "20190407231425",
+    "entityTableName": "category",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

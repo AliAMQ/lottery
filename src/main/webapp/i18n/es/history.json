@@ -1,0 +1,25 @@
+
+{
+    "lotteryApp": {
+        "history" : {
+            "home": {
+                "title": "Histories",
+                "createLabel": "Crear nuevo History",
+                "createOrEditLabel": "Crear o editar History",
+                "search": "Search for History"
+            },
+            "created": "Un nuevo History ha sido creado con el identificador {{ param }}",
+            "updated": "Un History ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un History ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar History {{ id }}?"
+            },
+            "detail": {
+                "title": "History"
+            },
+            "date": "Date",
+            "lottery": "Lottery",
+            "prize": "Prize"
+        }
+    }
+}

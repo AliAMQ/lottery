@@ -1,0 +1,71 @@
+{
+    "name": "UserProfile",
+    "fields": [
+        {
+            "fieldName": "state",
+            "fieldType": "State",
+            "fieldValues": "AK,AL,AZ,AR,CA,CO,CT,DE,FL,GA,HI,ID,IL,IN,IA,KS,KY,LA,ME,MD,MA,MI,MN,MS,MO,MT,NE,NV,NH,NJ,NM,NY,NC,ND,OH,OK,OR,PA,RI,SC,SD,TN,TX,UT,VT,VA,WA,WV,WI,WY"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imagepath",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "firstname",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastname",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "username",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "since",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "userProfile"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "lottery",
+            "otherEntityName": "lottery",
+            "otherEntityRelationshipName": "userProfile"
+        }
+    ],
+    "changelogDate": "20190407231424",
+    "entityTableName": "user_profile",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

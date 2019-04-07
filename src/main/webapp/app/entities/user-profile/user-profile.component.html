@@ -1,0 +1,99 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="lotteryApp.userProfile.home.title">User Profiles</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-user-profile" [routerLink]="['/user-profile/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="lotteryApp.userProfile.home.createLabel">
+            Create new User Profile
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'lotteryApp.userProfile.home.search' | translate }}">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="userProfiles">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="state"><span jhiTranslate="lotteryApp.userProfile.state">State</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="city"><span jhiTranslate="lotteryApp.userProfile.city">City</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="address"><span jhiTranslate="lotteryApp.userProfile.address">Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="phone"><span jhiTranslate="lotteryApp.userProfile.phone">Phone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="imagepath"><span jhiTranslate="lotteryApp.userProfile.imagepath">Imagepath</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="firstname"><span jhiTranslate="lotteryApp.userProfile.firstname">Firstname</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lastname"><span jhiTranslate="lotteryApp.userProfile.lastname">Lastname</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span jhiTranslate="lotteryApp.userProfile.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="username"><span jhiTranslate="lotteryApp.userProfile.username">Username</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="since"><span jhiTranslate="lotteryApp.userProfile.since">Since</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="userId"><span jhiTranslate="lotteryApp.userProfile.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let userProfile of userProfiles ;trackBy: trackId">
+                <td><a [routerLink]="['/user-profile', userProfile.id, 'view' ]">{{userProfile.id}}</a></td>
+                <td jhiTranslate="{{'lotteryApp.State.' + userProfile.state}}">{{userProfile.state}}</td>
+                <td>{{userProfile.city}}</td>
+                <td>{{userProfile.address}}</td>
+                <td>{{userProfile.phone}}</td>
+                <td>{{userProfile.imagepath}}</td>
+                <td>{{userProfile.firstname}}</td>
+                <td>{{userProfile.lastname}}</td>
+                <td>{{userProfile.email}}</td>
+                <td>{{userProfile.username}}</td>
+                <td>{{userProfile.since | date:'mediumDate'}}</td>
+                <td>
+                    {{userProfile.userId}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/user-profile', userProfile.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/user-profile', userProfile.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'user-profile/'+ userProfile.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="userProfiles && userProfiles.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>
