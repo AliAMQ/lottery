@@ -2,8 +2,10 @@ package com.lottery.web.service;
 
 import com.lottery.web.domain.Authority;
 import com.lottery.web.domain.User;
+import com.lottery.web.domain.UserProfile;
 import com.lottery.web.repository.AuthorityRepository;
 import com.lottery.web.config.Constants;
+import com.lottery.web.repository.UserProfileRepository;
 import com.lottery.web.repository.UserRepository;
 import com.lottery.web.repository.search.UserSearchRepository;
 import com.lottery.web.security.AuthoritiesConstants;
@@ -46,12 +48,15 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserSearchRepository userSearchRepository, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    private final UserProfileRepository userProfileRepository;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserSearchRepository userSearchRepository, AuthorityRepository authorityRepository, CacheManager cacheManager, UserProfileRepository userProfileRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.userSearchRepository = userSearchRepository;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.userProfileRepository= userProfileRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -114,6 +119,14 @@ public class UserService {
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
         userSearchRepository.save(newUser);
+
+        // Alireza- Create a profile for the new user
+        UserProfile userProfile = new UserProfile();
+        userProfile.setUser(newUser);
+        userProfile.setUsername(newUser.getLogin());
+        userProfileRepository.save(userProfile);
+
+
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
